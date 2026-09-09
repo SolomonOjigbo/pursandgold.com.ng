@@ -125,7 +125,7 @@ Tier guide: Starter for a single outlet, Growth for two to five outlets or a war
 
 | Code | Plan | Monthly fee | Limits | Status |
 |---|---|---|---|---|
-| PB-SUB | Pursberry subscription | Quote-based on the client's business needs until a Naira list is published. Indicative bands from the product plan: Starter about ₦32,000 (1 register, 2,500 SKUs, 1,000 transactions per month), Growth about ₦80,000 (3 registers, 10,000 SKUs, 5,000 transactions), Enterprise from about ₦240,000 plus ₦32,000 to ₦64,000 per extra branch or register | Per band | **Confirmed** (quote-based) |
+| PB-SUB | Pursberry subscription | Quote-based on the client's business needs. Indicative bands from the product plan: Starter about ₦32,000 (1 register, 2,500 SKUs, 1,000 transactions per month), Growth about ₦80,000 (3 registers, 10,000 SKUs, 5,000 transactions), Enterprise from about ₦240,000 plus ₦32,000 to ₦64,000 per extra branch or register | Per band | **Confirmed** (quote-based) |
 
 Terms from the plan: first 30 days free, post-paid on each tenant's own 30-day cycle, soft caps with a 7-day grace period. The indicative bands convert the plan's dollar tiers ($20, $50, $150) at its placeholder rate of 1,600. The plan describes a shared multi-tenant SaaS; if the portfolio's single-deployment rule applies to Pursberry too, the Enterprise band becomes the dedicated-deployment offer. **Decision**
 

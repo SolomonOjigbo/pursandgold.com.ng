@@ -1,6 +1,6 @@
 {
   "version": "Purs & Gold Limited · Master price book v2.0 · 9 September 2026 · Owner decisions applied · Naira for Nigeria, US dollars for Lusophone markets, exclusive of taxes",
-  "generatedAt": "2026-09-09T16:01:55.675Z",
+  "generatedAt": "2026-09-09T16:13:37.024Z",
   "sections": [
     {
       "id": "A",
@@ -632,7 +632,7 @@
                 {
                   "Code": "PB-SUB",
                   "Plan": "Pursberry subscription",
-                  "Monthly fee": "Quote-based on the client's business needs until a Naira list is published. Indicative bands from the product plan: Starter about ₦32,000 (1 register, 2,500 SKUs, 1,000 transactions per month), Growth about ₦80,000 (3 registers, 10,000 SKUs, 5,000 transactions), Enterprise from about ₦240,000 plus ₦32,000 to ₦64,000 per extra branch or register",
+                  "Monthly fee": "Quote-based on the client's business needs. Indicative bands from the product plan: Starter about ₦32,000 (1 register, 2,500 SKUs, 1,000 transactions per month), Growth about ₦80,000 (3 registers, 10,000 SKUs, 5,000 transactions), Enterprise from about ₦240,000 plus ₦32,000 to ₦64,000 per extra branch or register",
                   "Limits": "Per band",
                   "status": "Confirmed",
                   "note": "quote-based"
