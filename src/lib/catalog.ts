@@ -34,6 +34,14 @@ export function texts(container: { blocks: Block[] }): string[] {
   return container.blocks.filter((b): b is TextBlock => b.type === "text").map((b) => b.text);
 }
 
+/** Internal price-book commentary that must never reach a public page. */
+const INTERNAL = /\b(retired|removed from|decision|proposed|owner|SOP|scaffold|SDD|sprint|price book|Naira list|2026 review|design only|status:|concept\.|placeholder|withdrawn)\b/i;
+
+/** Text blocks safe to show publicly: no status commentary, no retirement notes. */
+export function publicTexts(container: { blocks: Block[] }): string[] {
+  return texts(container).filter((t) => !INTERNAL.test(t));
+}
+
 export function findByCode(code: string): CatalogItem | undefined {
   for (const s of catalog.sections) {
     for (const t of [...tables(s), ...s.subsections.flatMap(tables)]) {

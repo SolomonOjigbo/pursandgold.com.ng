@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { catalog, growthPlans, tables, texts, section, slaRows } from "@/lib/catalog";
+import { catalog, growthPlans, tables, texts, publicTexts, section, slaRows } from "@/lib/catalog";
 import { Container, Section, SectionHeading, Button } from "@/components/ui";
 import { PlanGrid, PriceTable, SlaTable } from "@/components/pricing";
 
@@ -80,7 +80,7 @@ export default function PricingPage() {
           <Section key={id} id={`section-${id}`} tone={idx % 2 === 0 ? "paper-2" : "paper"} className="scroll-mt-20">
             <Container>
               <SectionHeading eyebrow={`${id} · ${s.title.match(/\((.*)\)$/)?.[1] ?? ""}`} title={s.title.replace(/\s*\(.*\)$/, "")} text={SECTION_INTRO[id]} />
-              {texts(s).length ? <p className="mt-6 max-w-3xl text-sm text-text-2">{texts(s)[0]}</p> : null}
+              {publicTexts(s).length ? <p className="mt-6 max-w-3xl text-sm text-text-2">{publicTexts(s)[0]}</p> : null}
               <div className="mt-8 space-y-6">
                 {own.map((t, i) => (
                   <PriceTable key={i} block={t} caption={s.title} />
@@ -93,7 +93,7 @@ export default function PricingPage() {
                 return (
                   <div key={sub.title} className="mt-12">
                     <h3 className="text-xl font-bold">{sub.title.replace(/\s*\(.*\)$/, "")}</h3>
-                    {texts(sub).length ? <p className="mt-2 max-w-3xl text-sm text-text-2">{texts(sub)[0]}</p> : null}
+                    {publicTexts(sub).length ? <p className="mt-2 max-w-3xl text-sm text-text-2">{publicTexts(sub)[0]}</p> : null}
                     <div className="mt-5 space-y-6">
                       {sub.id === "E4" ? <SlaTable rows={slaRows()} /> : subTables.map((t, i) => <PriceTable key={i} block={t} caption={sub.title} />)}
                     </div>

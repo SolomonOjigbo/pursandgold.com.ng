@@ -6,7 +6,7 @@ import { planIcons, IconBadge } from "./icons";
 
 export function PlanGrid({ plans, currency = "₦" }: { plans: Plan[]; currency?: string }) {
   return (
-    <div className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(230px,1fr))]">
+    <div className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(215px,1fr))]">
       {plans.map((plan) => (
         <article
           key={plan.code}
@@ -35,7 +35,9 @@ export function PlanGrid({ plans, currency = "₦" }: { plans: Plan[]; currency?
                 <Check />
                 <span>
                   {inc.label}
-                  {inc.value !== "Yes" ? <span className={plan.recommended ? "text-paper/60" : "text-muted"}> · {inc.value}</span> : null}
+                  {inc.value !== "Yes" ? (
+                    <span className={plan.recommended ? "text-paper/60" : "text-muted"}> · {inc.value.replace(/^Yes \((.*)\)$/, "$1")}</span>
+                  ) : null}
                 </span>
               </li>
             ))}
