@@ -6,7 +6,8 @@ export const site = {
   productTagline: "Predictable. Secure. Profitable. Always On.",
   principle:
     "Our product is not a website, an ERP or an email system. It is a fully integrated digital business system.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.pursandgold.com.ng",
+  // Use a fallback when the env var is undefined, null, or an empty string
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.pursandgold.com.ng",
   email: "info@pursandgold.com.ng",
   phones: {
     primary: { display: "+234 810 475 4846", tel: "+2348104754846" },
