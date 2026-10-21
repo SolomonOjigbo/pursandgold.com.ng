@@ -19,11 +19,10 @@ export const site = {
   },
   whatsapp: "https://wa.me/2348104754846",
   whatsappPt: "https://wa.me/2385367405",
-  location: "Lagos and Abuja, Nigeria",
+  location: "Lagos, Nigeria",
   founded: 2015,
   offices: [
-    { city: "Lagos", address: "1B Bamidele-Daramola Street, Mende, Maryland, Lagos", phone: { display: "+234 810 475 4846", tel: "+2348104754846" } },
-    { city: "Abuja", address: "House 3, Plot 54, Cadastral Zone C01, Idu Industrial Area, Karmo District, Abuja", phone: { display: "+234 813 448 0363", tel: "+2348134480363" } },
+    { city: "Lagos", address: "Block 252, Flat 3, 3rd Avenue, Abesan Estate, Ipaja, Lagos", phone: { display: "+234 810 475 4846", tel: "+2348104754846" } },
   ],
   story:
     "Purs & Gold began in 2015 when two brothers, Solomon Ojigbo and Paul Oghenekevwe Ojigbo, started building websites and selling POS software to Lagos businesses. Ten years on, the same idea runs the company: one accountable partner for everything digital, now with six software products of its own.",

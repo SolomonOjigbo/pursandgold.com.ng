@@ -77,8 +77,9 @@ export const products: Product[] = [
       "Designed for Nigerian VAT, packaging and payment habits",
     ],
     delivery: "Early access programme for pilot retailers; general availability to follow.",
-    pricing: "Onboarding from the POS and inventory ladder plus a monthly subscription, quoted on outlets, registers and volume.",
-    catalogCodes: ["POS-FULL", "PB-SUB"],
+    pricing:
+      "Onboarding from the POS and inventory ladder, then a monthly subscription — or ten months' money for a full year. Every plan carries every module; the tier changes how much you can have, not what you can open.",
+    catalogCodes: ["POS-FULL", "PB-STR", "PB-GRW", "PB-ENT"],
     accent: "rose",
   },
   {

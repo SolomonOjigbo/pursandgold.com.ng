@@ -121,13 +121,17 @@ Fast sales processing with receipts, discounts and multi-payment support; real-t
 
 Tier guide: Starter for a single outlet, Growth for two to five outlets or a warehouse, Scale for multi-location with ERP linkage.
 
-**Product behind this section: Pursberry** (formerly Octa App), a POS, inventory and double-entry accounting SaaS with an offline Electron POS terminal. Status: scaffold with a 15-sprint plan. The ladder above becomes the deployment and onboarding fee; the subscription below is drawn from the product's own development plan.
+**Product behind this section: Pursberry** (formerly Octa App), a POS, inventory and double-entry accounting SaaS with an offline Electron POS terminal. Status: early access — POS, inventory, procurement and the full double-entry ledger are built and tested; card payments, WhatsApp messaging and thermal printing are built and awaiting a provider account or device; payslips, PAYE and withholding tax are deliberately not built pending confirmed rates. The ladder above becomes the deployment and onboarding fee; the subscription below is the product's own published price list.
 
-| Code | Plan | Monthly fee | Limits | Status |
-|---|---|---|---|---|
-| PB-SUB | Pursberry subscription | Quote-based on the client's business needs. Indicative bands from the product plan: Starter about ₦32,000 (1 register, 2,500 SKUs, 1,000 transactions per month), Growth about ₦80,000 (3 registers, 10,000 SKUs, 5,000 transactions), Enterprise from about ₦240,000 plus ₦32,000 to ₦64,000 per extra branch or register | Per band | **Confirmed** (quote-based) |
+| Code | Plan | Monthly fee | Optional 12-month prepay (two months free) | Limits | Status |
+|---|---|---|---|---|---|
+| PB-STR | Pursberry Starter | ₦25,000 | ₦250,000 | 1 branch, 1 checkout counter, 5,000 products, 2,000 sales per 30 days | **Confirmed** |
+| PB-GRW | Pursberry Growth | ₦50,000 | ₦500,000 | 3 branches, 3 checkout counters, 10,000 products, 6,000 sales per 30 days | **Confirmed** |
+| PB-ENT | Pursberry Enterprise | ₦200,000 | ₦2,000,000 | Unlimited branches, checkout counters, products and sales | **Confirmed** |
 
-Terms from the plan: first 30 days free, post-paid on each tenant's own 30-day cycle, soft caps with a 7-day grace period. The indicative bands convert the plan's dollar tiers ($20, $50, $150) at its placeholder rate of 1,600. The plan describes a shared multi-tenant SaaS; if the portfolio's single-deployment rule applies to Pursberry too, the Enterprise band becomes the dedicated-deployment offer. **Decision**
+Every plan carries every module: the tier changes how much you can have, never which parts of the system you may open. The first 30 days are free, billing is post-paid on each tenant's own 30-day cycle, and the limits are soft with a seven-day grace period — crossing one is an upgrade conversation, not a cut-off. A year paid up front is ten months' money for twelve months' service on every plan; it is arranged and invoiced once rather than switched on in the app, because the billing engine runs on 30-day cycles.
+
+The naira list above was confirmed in October 2026 and replaces the earlier bands, which converted the plan's dollar tiers ($20, $50, $150) at a placeholder rate of 1,600 and had been going stale ever since. The per-extra-branch add-on was dropped with them: the Enterprise tier has no branch limit, and the billing engine only charges for branches beyond a limit, so that fee could never have been raised. The plan describes a shared multi-tenant SaaS; if the portfolio's single-deployment rule applies to Pursberry too, the Enterprise band becomes the dedicated-deployment offer. **Decision**
 
 ### C3. Veritory (pharmaceutical and FMCG field force)
 
@@ -344,7 +348,7 @@ For Cape Verde and other Portuguese-speaking markets, served by the Cape Verde m
 | EML-VPS | VPS mail server setup | From $75 | **Confirmed** |
 | EML-BULK | Bulk email marketing, per month | From $30 | **Confirmed** |
 | POS-FULL | Full POS + Inventory deployment | $140 / $250 / $390 | **Confirmed** |
-| PB-SUB | Pursberry subscription, per month | Quote-based; indicative $20 / $50 / from $150 from the product plan | **Confirmed** (quote-based) |
+| PB-SUB | Pursberry subscription, per month | Quote-based; indicative $20 / $50 / from $150 | **Confirmed** (quote-based) |
 | RET-STR to RET-ENT | Managed IT retainer, per month | $95 / $155 / $220 / $300 | **Confirmed** |
 
 ## J. Change log
