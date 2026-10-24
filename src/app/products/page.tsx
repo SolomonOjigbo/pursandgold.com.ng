@@ -5,7 +5,7 @@ import { ProductCard } from "@/components/products";
 
 export const metadata: Metadata = {
   title: "Software products",
-  description: "ParishHub, Pursberry, Veritory, School ERP, hospital management and the GoodHeart caregiver portal: software built by Purs & Gold for real sectors.",
+  description: "ParishHub, Pursberry, Veritory, School ERP, Tenaville and the GoodHeart caregiver portal: software built by Purs & Gold for real sectors.",
 };
 
 export default function ProductsPage() {
@@ -32,7 +32,7 @@ export default function ProductsPage() {
       </Section>
       <Section tone="paper-2">
         <Container>
-          <SectionHeading eyebrow="Not on the list?" title="We also implement partner platforms" text="Hotel management, records systems for NGOs and government, and custom portals are delivered on the same lifecycle with quote-based pricing." />
+          <SectionHeading eyebrow="Not on the list?" title="We also implement partner platforms" text="Hospital and clinic management, hotel management, records systems for NGOs and government, and custom portals are delivered on the same lifecycle with quote-based pricing." />
           <div className="mt-8">
             <Button href="/start">Tell us what you run</Button>
           </div>

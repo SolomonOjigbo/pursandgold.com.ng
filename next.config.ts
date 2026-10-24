@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
       { source: "/blog/:path*", destination: "/", permanent: true },
       { source: "/client-support", destination: "/contact", permanent: true },
       { source: "/industries/:path+", destination: "/industries", permanent: true },
+      // The hospital product was withdrawn from the portfolio; clinic systems remain an implementation service.
+      { source: "/products/hospital-erp", destination: "/products", permanent: true },
     ];
   },
 };

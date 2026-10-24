@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s · Purs & Gold",
   },
   description:
-    "One partner for everything digital in Nigeria: websites, marketing, ERP, CRM, POS, cloud productivity and managed IT, plus our own software for parishes, retailers, pharma field teams, schools and clinics.",
+    "One partner for everything digital in Nigeria: websites, marketing, ERP, CRM, POS, cloud productivity and managed IT, plus our own software for parishes, retailers, pharma field teams, schools, property managers and care providers.",
   openGraph: {
     type: "website",
     siteName: site.name,

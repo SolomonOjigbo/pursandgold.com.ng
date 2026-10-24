@@ -109,7 +109,7 @@ Retired: "Custom enterprise systems with AI from ₦1,000,000+" (Pharma Proposal
 
 ### C2. POS & Inventory (packaged, retail and wholesale)
 
-Fast sales processing with receipts, discounts and multi-payment support; real-time stock, low-stock alerts and reorder triggers; multi-branch dashboard with inter-branch transfers; supplier and purchase orders; role-based staff access with cashier audit trails; sales analytics. Ideal for supermarkets, pharmacies, fashion, electronics, distributors, wholesalers, restaurants and hardware stores. Timeline 2 to 6 weeks. Hardware billed separately.
+Fast sales processing with receipts, discounts and multi-payment support; real-time stock, low-stock alerts and reorder triggers; multi-branch dashboard with inter-branch transfers; supplier and purchase orders; role-based staff access with cashier audit trails; sales analytics. Ideal for supermarkets, provision stores, fashion, electronics, distributors, wholesalers, restaurants and hardware stores. Timeline 2 to 6 weeks. Hardware billed separately.
 
 | Code | Item | Starter | Growth | Scale | Status |
 |---|---|---|---|---|---|

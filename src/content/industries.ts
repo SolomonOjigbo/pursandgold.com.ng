@@ -35,7 +35,7 @@ export const industries: Industry[] = [
     name: "Healthcare Providers",
     pains: ["Paper records and lost histories", "Billing leakage and claim delays", "Compliance without audit trails"],
     answer: "Hospital and clinic management with EHR, billing, pharmacy and lab, plus secure cloud productivity.",
-    products: ["hospital-erp"],
+    products: [],
     services: ["vertical-systems", "cloud-and-managed-it"],
   },
   {

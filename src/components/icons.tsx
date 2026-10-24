@@ -3,7 +3,6 @@ import {
   ShoppingCart,
   MapPin,
   GraduationCap,
-  HeartPulse,
   HeartHandshake,
   Rocket,
   Globe,
@@ -40,7 +39,7 @@ export const productIcons: Record<string, LucideIcon> = {
   pursberry: ShoppingCart,
   veritory: MapPin,
   "school-erp": GraduationCap,
-  "hospital-erp": HeartPulse,
+  tenaville: Building2,
   goodheart: HeartHandshake,
 };
 

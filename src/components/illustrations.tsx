@@ -13,7 +13,7 @@ const palettes: Record<Product["accent"], { bg1: string; bg2: string; panel: str
   violet: { bg1: "#1d1233", bg2: "#6c4fb3", panel: "#f6f3fd", ink: "#1e1433", line: "#e0d8f2", hi: "#7c5cc4" },
 };
 
-type Scene = "members" | "pos" | "map" | "timetable" | "vitals" | "roster";
+type Scene = "members" | "pos" | "map" | "timetable" | "units" | "roster";
 
 function Window({ p, children }: { p: (typeof palettes)[Product["accent"]]; children: React.ReactNode }) {
   return (
@@ -103,17 +103,34 @@ function SceneTimetable({ p }: { p: (typeof palettes)["gold"] }) {
   );
 }
 
-function SceneVitals({ p }: { p: (typeof palettes)["gold"] }) {
+function SceneUnits({ p }: { p: (typeof palettes)["gold"] }) {
   return (
     <>
-      <path d="M40 96h24l8-22 10 44 12-30 8 8h28l8-14 10 14h44" stroke={p.hi} strokeWidth="2.5" fill="none" strokeLinejoin="round" strokeLinecap="round" />
-      {[0, 1, 2].map((i) => (
-        <rect key={i} x={44 + i * 54} y="112" width="46" height="18" rx="4" fill={p.line} />
-      ))}
-      <g transform="translate(168 48)">
-        <rect x="0" y="0" width="28" height="28" rx="6" fill={p.hi} />
-        <path d="M14 7v14M7 14h14" stroke={p.panel} strokeWidth="3.5" strokeLinecap="round" />
+      <g transform="translate(44 52)">
+        <path d="M0 78V14L26 2l26 12v64z" fill={p.line} />
+        {[0, 1, 2].map((r) =>
+          [0, 1].map((c) => (
+            <rect
+              key={`${r}-${c}`}
+              x={11 + c * 20}
+              y={20 + r * 17}
+              width="12"
+              height="11"
+              rx="2"
+              fill={(r + c) % 2 ? p.hi : p.ink}
+              opacity={(r + c) % 2 ? 0.9 : 0.25}
+            />
+          )),
+        )}
+        <rect x="21" y="66" width="10" height="12" rx="2" fill={p.panel} />
       </g>
+      {[0, 1, 2, 3].map((i) => (
+        <g key={i} transform={`translate(110 ${54 + i * 20})`}>
+          <rect x="0" y="1" width={44 - i * 5} height="4" rx="2" fill={p.ink} opacity=".65" />
+          <rect x="0" y="9" width="28" height="3" rx="1.5" fill={p.ink} opacity=".25" />
+          <rect x="64" y="0" width="22" height="13" rx="4" fill={i === 1 ? p.line : p.hi} opacity={i === 1 ? 1 : 0.9} />
+        </g>
+      ))}
     </>
   );
 }
@@ -140,7 +157,7 @@ const sceneFor: Record<string, Scene> = {
   pursberry: "pos",
   veritory: "map",
   "school-erp": "timetable",
-  "hospital-erp": "vitals",
+  tenaville: "units",
   goodheart: "roster",
 };
 
@@ -163,7 +180,7 @@ export function ProductIllustration({ product, className = "" }: { product: Prod
         {scene === "pos" && <ScenePos p={p} />}
         {scene === "map" && <SceneMap p={p} />}
         {scene === "timetable" && <SceneTimetable p={p} />}
-        {scene === "vitals" && <SceneVitals p={p} />}
+        {scene === "units" && <SceneUnits p={p} />}
         {scene === "roster" && <SceneRoster p={p} />}
       </Window>
     </svg>
