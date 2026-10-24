@@ -1,6 +1,6 @@
 {
   "version": "Purs & Gold Limited · Master price book v2.0 · 9 September 2026 · Owner decisions applied · Naira for Nigeria, US dollars for Lusophone markets, exclusive of taxes",
-  "generatedAt": "2026-10-24T10:54:00.160Z",
+  "generatedAt": "2026-10-24T11:13:46.988Z",
   "sections": [
     {
       "id": "A",
@@ -1085,6 +1085,65 @@
               ]
             }
           ]
+        },
+        {
+          "id": "D6",
+          "title": "Tenaville (property management)",
+          "blocks": [
+            {
+              "type": "text",
+              "text": "Property and unit records, landlord mandates, tenants and leases, rent schedules with arrears ageing and numbered receipts, an auditable landlord ledger with commission, statements and remittances, maintenance from first request to closed work order, documents and inspections, tenant and landlord self-service, and a native staff app for iOS and Android that captures field work offline. Later releases add virtual accounts and reconciliation through a licensed payment partner, a CRM pipeline with appointments, configurable tenant screening, portfolio analytics, and a rent-financing journey through an authorised provider. Nigeria-first: naira, state and LGA fields, WhatsApp, SMS and email. It is not a public property marketplace: no listings, no property-search portal and no property-sale leads."
+            },
+            {
+              "type": "table",
+              "columns": [
+                "Code",
+                "Item",
+                "Price"
+              ],
+              "items": [
+                {
+                  "Code": "TEN-ONB",
+                  "Item": "Onboarding, configuration and staff training per agency",
+                  "Price": "Quote-based on portfolio size, branches and modules",
+                  "status": "Confirmed",
+                  "note": "quote-based"
+                },
+                {
+                  "Code": "TEN-SUB",
+                  "Item": "Monthly subscription, tiered by units under management",
+                  "Price": "Quote-based on units under management",
+                  "status": "Confirmed",
+                  "note": "quote-based"
+                },
+                {
+                  "Code": "TEN-MIG",
+                  "Item": "Assisted import of tenants, leases, arrears and opening ledger balances at cutover",
+                  "Price": "Quote-based; self-service spreadsheet import is included",
+                  "status": "Confirmed",
+                  "note": "quote-based"
+                },
+                {
+                  "Code": "TEN-MSG",
+                  "Item": "WhatsApp, SMS and email credits",
+                  "Price": "Pass-through at cost",
+                  "status": "Confirmed",
+                  "note": null
+                },
+                {
+                  "Code": "TEN-PAY",
+                  "Item": "Payment provider fees for virtual accounts and payment links",
+                  "Price": "Pass-through at cost",
+                  "status": "Confirmed",
+                  "note": null
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "text": "Product behind this section: Tenaville, specified in Tenaville Property Management PRD v3 for Nigerian estate agencies, property managers and landlords. Status: in design, no code yet; R1 is core management (portfolio, tenancy, money, landlord ledger, maintenance, migration and the staff app), R2 adds payment automation, CRM, screening and analytics, and R3 adds partner-enabled rent financing. Three open points before any list price is published. First, the PRD prices by units under management with volume tiers but says to validate willingness to pay with 5 to 10 agencies first, so every row above is quote-based under the standing rule for unpriced items and the bands are not yet set. Second, the PRD specifies a shared multi-tenant SaaS with database-enforced isolation rather than a deployment per client, so the portfolio's single-deployment rule is an open question here as it is for Pursberry. Third, the product name is still subject to trademark, domain and CAC checks. Decision"
+            }
+          ]
         }
       ]
     },
@@ -1779,7 +1838,7 @@
             {
               "Version": "2.0, portfolio and audience corrections",
               "Date": "24 October 2026",
-              "Change": "Pursberry is not designed for pharmacies or clinics: they come off the POS section's \"ideal for\" line and off the product's audience on the website. The Hospital Management System is withdrawn as a Purs & Gold product and replaced in the portfolio by Tenaville, a property-management platform for estate agencies, property managers and landlords (PRD v3; no prices yet, so quote-based under the unpriced-item rule). Section D1 is unchanged: hospital and clinic work remains a quote-based implementation of a third-party platform",
+              "Change": "Pursberry is not designed for pharmacies or clinics: they come off the POS section's \"ideal for\" line and off the product's audience on the website. The Hospital Management System is withdrawn as a Purs & Gold product and replaced in the portfolio by Tenaville, a property-management platform for estate agencies, property managers and landlords, added as section D6 with every row quote-based under the unpriced-item rule (PRD v3). Section D1 is unchanged: hospital and clinic work remains a quote-based implementation of a third-party platform",
               "status": null,
               "note": null
             }

@@ -167,7 +167,7 @@ export const products: Product[] = [
     ],
     delivery: "In design against a full product specification. Pilot agencies are being selected to run a complete month-end cycle on live portfolios.",
     pricing: "Priced by units under management: a one-time setup and data-migration fee, then a monthly subscription, quoted on your portfolio.",
-    catalogCodes: [],
+    catalogCodes: ["TEN-ONB", "TEN-SUB"],
     accent: "moss",
   },
   {
