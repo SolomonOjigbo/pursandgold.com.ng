@@ -22,6 +22,8 @@ export type Product = {
   accent: "gold" | "navy" | "teal" | "rose" | "violet" | "moss";
   /** Wordmark from the product's own brand kit, in both themes. Products without one fall back to the name set in type. */
   logo?: { light: string; dark: string; width: number; height: number; plateOnDark?: boolean };
+  /** A demo anyone can open. Only set this where the deployment is ready for cold visitors. */
+  demoUrl?: string;
 };
 
 export const products: Product[] = [
@@ -119,7 +121,7 @@ export const products: Product[] = [
     slug: "pursedu-erp",
     name: "PursEdu ERP",
     category: "Schools",
-    status: "In design",
+    status: "Available now",
     headline: "A Nigerian school on one system, from admissions to report cards.",
     summary:
       "Students, guardians, academics, attendance, timetable, examinations and approved results, fees with Paystack, lesson plans, homework and online exams, HR and payroll, library, transport, hostel and a parent portal, with the three-term session, continuous assessment and grading rules Nigerian schools actually use.",
@@ -139,10 +141,11 @@ export const products: Product[] = [
       "Approve-then-publish results with audited corrections",
       "Affordable, cloud-hosted and multi-campus from day one",
     ],
-    delivery: "MVP in build on the same platform as Veritory; early schools shape the roadmap.",
+    delivery: "Deployed per school, live within days of data handover.",
     pricing: "Onboarding by school size plus a subscription quoted per student per term.",
     catalogCodes: ["SCH-ONB", "SCH-SUB"],
     accent: "teal",
+    demoUrl: "https://pursedu-erp.vercel.app",
     logo: {
       light: "/brand/products/pursedu-light.png",
       dark: "/brand/products/pursedu-light.png",

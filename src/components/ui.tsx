@@ -56,11 +56,14 @@ export function Button({
   children,
   variant = "gold",
   className = "",
+  external = false,
 }: {
   href: string;
   children: ReactNode;
   variant?: "gold" | "outline" | "outline-dark" | "ghost";
   className?: string;
+  /** Opens in a new tab. Use for destinations outside pursandgold.com.ng. */
+  external?: boolean;
 }) {
   const variants = {
     gold: "bg-gold text-ink hover:bg-gold-2",
@@ -71,6 +74,7 @@ export function Button({
   return (
     <Link
       href={href}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={`inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition ${variants[variant]} ${className}`}
     >
       {children}

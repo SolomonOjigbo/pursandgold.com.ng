@@ -5,7 +5,7 @@ import { findByCode } from "@/lib/catalog";
 import { Container, Section, SectionHeading, Button, Badge, Check } from "@/components/ui";
 import { statusTone } from "@/components/products";
 import { ProductIllustration } from "@/components/illustrations";
-import { productIcons, IconBadge } from "@/components/icons";
+import { productIcons, IconBadge, ArrowUpRight } from "@/components/icons";
 import { ProductLogo } from "@/components/ProductLogo";
 
 export function generateStaticParams() {
@@ -46,6 +46,12 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             <p className="mt-4 max-w-xl text-paper/70">{product.audience}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href={`/contact?interest=${encodeURIComponent(product.name)}`}>Request a demo</Button>
+              {product.demoUrl ? (
+                <Button href={product.demoUrl} variant="outline" external>
+                  See the live demo
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </Button>
+              ) : null}
               <Button href="/products" variant="outline">
                 All products
               </Button>

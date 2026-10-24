@@ -31,6 +31,7 @@ import {
   PencilRuler,
   FileCheck,
   Users,
+  ArrowUpRight,
   type LucideIcon,
 } from "lucide-react";
 
@@ -77,7 +78,7 @@ export const planIcons: Record<string, LucideIcon> = {
 
 export const proofIcons: LucideIcon[] = [Database, Newspaper, Church];
 
-export { Mail, Phone, MessageCircle, MapPin, Users, ShieldCheck };
+export { Mail, Phone, MessageCircle, MapPin, Users, ShieldCheck, ArrowUpRight };
 
 export function IconBadge({ icon: Icon, dark = false, size = "md" }: { icon: LucideIcon; dark?: boolean; size?: "sm" | "md" | "lg" }) {
   const dims = { sm: "h-8 w-8 [&>svg]:h-4 [&>svg]:w-4", md: "h-11 w-11 [&>svg]:h-5 [&>svg]:w-5", lg: "h-14 w-14 [&>svg]:h-7 [&>svg]:w-7" }[size];
