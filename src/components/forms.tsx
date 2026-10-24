@@ -167,7 +167,7 @@ export function DiscoveryForm({ plan }: { plan?: string }) {
           "Managed IT support retainer",
           "Digital marketing and social media",
           "Branding and creative",
-          "ParishHub, School ERP or another software product",
+          "ParishHub, PursEdu ERP or another software product",
           "Mobile app",
         ].map((s) => (
           <label key={s} className="flex items-start gap-2 rounded-md border border-line bg-white px-3 py-2 text-sm">

@@ -20,6 +20,8 @@ export type Product = {
   pricing: string;
   catalogCodes: string[];
   accent: "gold" | "navy" | "teal" | "rose" | "violet" | "moss";
+  /** Wordmark from the product's own brand kit, in both themes. Products without one fall back to the name set in type. */
+  logo?: { light: string; dark: string; width: number; height: number; plateOnDark?: boolean };
 };
 
 export const products: Product[] = [
@@ -81,6 +83,7 @@ export const products: Product[] = [
       "Onboarding from the POS and inventory ladder, then a monthly subscription — or ten months' money for a full year. Every plan carries every module; the tier changes how much you can have, not what you can open.",
     catalogCodes: ["POS-FULL", "PB-STR", "PB-GRW", "PB-ENT"],
     accent: "rose",
+    logo: { light: "/brand/products/pursberry-light.svg", dark: "/brand/products/pursberry-dark.svg", width: 680, height: 320 },
   },
   {
     slug: "veritory",
@@ -110,10 +113,11 @@ export const products: Product[] = [
     pricing: "Dedicated deployment fee plus a monthly fee per active rep, quoted on team size and territories.",
     catalogCodes: ["VER-DEP", "VER-REP"],
     accent: "navy",
+    logo: { light: "/brand/products/veritory-light.svg", dark: "/brand/products/veritory-dark.svg", width: 1511, height: 423 },
   },
   {
-    slug: "school-erp",
-    name: "School ERP, LMS & CBT",
+    slug: "pursedu-erp",
+    name: "PursEdu ERP",
     category: "Schools",
     status: "In design",
     headline: "A Nigerian school on one system, from admissions to report cards.",
@@ -139,6 +143,13 @@ export const products: Product[] = [
     pricing: "Onboarding by school size plus a subscription quoted per student per term.",
     catalogCodes: ["SCH-ONB", "SCH-SUB"],
     accent: "teal",
+    logo: {
+      light: "/brand/products/pursedu-light.png",
+      dark: "/brand/products/pursedu-light.png",
+      width: 1100,
+      height: 394,
+      plateOnDark: true,
+    },
   },
   {
     slug: "tenaville",

@@ -5,7 +5,7 @@ import { ProductCard } from "@/components/products";
 
 export const metadata: Metadata = {
   title: "Software products",
-  description: "ParishHub, Pursberry, Veritory, School ERP, Tenaville and the GoodHeart caregiver portal: software built by Purs & Gold for real sectors.",
+  description: "ParishHub, Pursberry, Veritory, PursEdu ERP, Tenaville and the GoodHeart caregiver portal: software built by Purs & Gold for real sectors.",
 };
 
 export default function ProductsPage() {

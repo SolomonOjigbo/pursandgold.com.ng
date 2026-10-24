@@ -1,6 +1,6 @@
 {
   "version": "Purs & Gold Limited · Master price book v2.0 · 9 September 2026 · Owner decisions applied · Naira for Nigeria, US dollars for Lusophone markets, exclusive of taxes",
-  "generatedAt": "2026-10-24T11:13:46.988Z",
+  "generatedAt": "2026-10-24T11:35:21.769Z",
   "sections": [
     {
       "id": "A",
@@ -871,7 +871,7 @@
             },
             {
               "type": "text",
-              "text": "Product behind this section: School ERP, LMS and CBT (unnamed), a Supabase-first multi-campus SaaS specified in five design volumes with 32 modules, 19 roles, Paystack fees and Nigerian term, grading and results workflows. Status: design only. Once built, the ladder above becomes the deployment and onboarding fee and a subscription applies."
+              "text": "Product behind this section: PursEdu ERP, a multi-tenant school management SaaS for Nigerian schools: students and admissions, sessions, terms, classes and subjects, staff, attendance and timetables, examinations, results and report cards, fees and payments, HR, leave and payroll, library, inventory, transport, hostel and communications. Status: built and deployed, with an integration test suite across every module; it was the unnamed School ERP, LMS and CBT in earlier versions of this catalog. The ladder above becomes the deployment and onboarding fee and a subscription applies."
             },
             {
               "type": "table",
@@ -1839,6 +1839,13 @@
               "Version": "2.0, portfolio and audience corrections",
               "Date": "24 October 2026",
               "Change": "Pursberry is not designed for pharmacies or clinics: they come off the POS section's \"ideal for\" line and off the product's audience on the website. The Hospital Management System is withdrawn as a Purs & Gold product and replaced in the portfolio by Tenaville, a property-management platform for estate agencies, property managers and landlords, added as section D6 with every row quote-based under the unpriced-item rule (PRD v3). Section D1 is unchanged: hospital and clinic work remains a quote-based implementation of a third-party platform",
+              "status": null,
+              "note": null
+            },
+            {
+              "Version": "2.0, PursEdu ERP named",
+              "Date": "24 October 2026",
+              "Change": "The School Management System's product is named: PursEdu ERP, built and deployed rather than design only. D2's product paragraph is updated and the website product moves from /products/school-erp to /products/pursedu-erp. Prices in D2 are unchanged",
               "status": null,
               "note": null
             }

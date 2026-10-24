@@ -156,7 +156,7 @@ const sceneFor: Record<string, Scene> = {
   parishhub: "members",
   pursberry: "pos",
   veritory: "map",
-  "school-erp": "timetable",
+  "pursedu-erp": "timetable",
   tenaville: "units",
   goodheart: "roster",
 };

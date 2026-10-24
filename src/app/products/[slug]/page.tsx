@@ -6,6 +6,7 @@ import { Container, Section, SectionHeading, Button, Badge, Check } from "@/comp
 import { statusTone } from "@/components/products";
 import { ProductIllustration } from "@/components/illustrations";
 import { productIcons, IconBadge } from "@/components/icons";
+import { ProductLogo } from "@/components/ProductLogo";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -29,11 +30,18 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         <Container className="grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-[1.1fr_1fr]">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <IconBadge icon={productIcons[product.slug] ?? productIcons.parishhub} dark />
+              {product.logo ? null : <IconBadge icon={productIcons[product.slug] ?? productIcons.parishhub} dark />}
               <p className="eyebrow text-gold-2">{product.category}</p>
               <Badge tone={statusTone[product.status]}>{product.status}</Badge>
             </div>
-            <h1 className="mt-4 text-4xl font-extrabold sm:text-5xl">{product.name}</h1>
+            {product.logo ? (
+              <>
+                <h1 className="sr-only">{product.name}</h1>
+                <ProductLogo product={product} on="dark" className="mt-5" />
+              </>
+            ) : (
+              <h1 className="mt-4 text-4xl font-extrabold sm:text-5xl">{product.name}</h1>
+            )}
             <p className="mt-4 text-xl text-paper/85">{product.headline}</p>
             <p className="mt-4 max-w-xl text-paper/70">{product.audience}</p>
             <div className="mt-8 flex flex-wrap gap-3">

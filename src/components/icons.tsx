@@ -38,7 +38,7 @@ export const productIcons: Record<string, LucideIcon> = {
   parishhub: Church,
   pursberry: ShoppingCart,
   veritory: MapPin,
-  "school-erp": GraduationCap,
+  "pursedu-erp": GraduationCap,
   tenaville: Building2,
   goodheart: HeartHandshake,
 };

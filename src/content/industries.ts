@@ -42,8 +42,8 @@ export const industries: Industry[] = [
     slug: "education",
     name: "Schools",
     pains: ["Manual results and report cards", "Fees chased by hand", "Parents in the dark"],
-    answer: "School ERP with approved results, Paystack fees and a parent portal, on Nigerian term and grading rules.",
-    products: ["school-erp"],
+    answer: "PursEdu ERP with approved results, Paystack fees and a parent portal, on Nigerian term and grading rules.",
+    products: ["pursedu-erp"],
     services: ["vertical-systems", "web-and-mobile"],
   },
   {

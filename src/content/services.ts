@@ -69,7 +69,7 @@ export const services: ServiceLine[] = [
       "Records, operations and accounting platforms tailored to how each sector actually runs: sacraments and societies for parishes, terms and results for schools, EHR and billing for clinics, bookings and housekeeping for hotels.",
     bullets: [
       "ParishHub for Catholic parishes",
-      "School ERP, LMS and computer-based testing",
+      "PursEdu ERP: school management, LMS and computer-based testing",
       "Hospital and clinic management",
       "Records and accounting for NGOs, government and corporate offices",
     ],
