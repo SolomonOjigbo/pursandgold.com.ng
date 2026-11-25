@@ -6,8 +6,9 @@ import { createHmac } from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
 import { drizzle } from "drizzle-orm/pglite";
 import { eq } from "drizzle-orm";
-import { payDeliveries, payEvents, paySubscriptions, payTransactions } from "@/db/schema";
+import { payDeliveries, payEvents, payPlans, paySubscriptions, payTransactions } from "@/db/schema";
 import { processPaystackEvent } from "@/lib/payments/process-event";
+import { ensureMonthlyPlan } from "@/lib/payments/plans";
 import { attemptDelivery } from "@/lib/payments/deliver";
 import { signOutbound, verifyPaystackSignature } from "@/lib/payments/signature";
 import { verifyPursPayEvent } from "../docs/payments/reference/purs-pay";
@@ -21,7 +22,9 @@ process.env.PURS_PAY_WEBHOOK_SECRET = "whsec_tena"; // what a product app would 
 const pg = new PGlite();
 await pg.exec(readFileSync("drizzle/0001_payments.sql", "utf8"));
 await pg.exec(readFileSync("drizzle/0001_payments.sql", "utf8")); // re-runnable
-const db = drizzle(pg, { schema: { payDeliveries, payEvents, paySubscriptions, payTransactions } }) as any;
+await pg.exec(readFileSync("drizzle/0002_pay_plans.sql", "utf8"));
+await pg.exec(readFileSync("drizzle/0002_pay_plans.sql", "utf8")); // re-runnable
+const db = drizzle(pg, { schema: { payDeliveries, payEvents, payPlans, paySubscriptions, payTransactions } }) as any;
 
 let failures = 0;
 const check = (name: string, ok: boolean, extra?: unknown) => { console.log(`${ok ? "PASS" : "FAIL"}  ${name}`, ok ? "" : extra ?? ""); if (!ok) failures++; };
@@ -30,9 +33,15 @@ const check = (name: string, ok: boolean, extra?: unknown) => { console.log(`${o
 let verifyResponse: any = null;
 let productStatus = 200;
 const received: { headers: Headers; body: string }[] = [];
+let planCalls = 0;
 globalThis.fetch = (async (url: any, init: any) => {
   const u = String(url);
   if (u.startsWith("https://api.paystack.co/transaction/verify/")) return new Response(JSON.stringify({ status: true, message: "ok", data: verifyResponse }), { status: 200 });
+  if (u === "https://api.paystack.co/plan") {
+    planCalls++;
+    const input = JSON.parse(String(init.body));
+    return new Response(JSON.stringify({ status: true, message: "ok", data: { plan_code: `PLN_on_demand_${planCalls}`, ...input } }), { status: 200 });
+  }
   if (u === "https://tena.test/hook") { received.push({ headers: new Headers(init.headers), body: init.body }); return new Response("", { status: productStatus }); }
   throw new Error("unexpected fetch " + u);
 }) as any;
@@ -164,6 +173,17 @@ check("12th failed attempt marks delivery dead", d.status === "dead" && d.attemp
 let dup = false;
 try { await seedTxn({ reference: "TNV-AAA", expectedAmountKobo: 1 }); } catch { dup = true; }
 check("duplicate reference rejected by unique index", dup);
+
+// 12. on-demand recurring plans: created once per product + plan + seats + currency + amount, reused after
+const planInput = { product: "tenaville" as const, mode: "test" as const, planKey: "starter", seats: 5, currency: "NGN", amountKobo: 4_000_000 };
+const code1 = await ensureMonthlyPlan(db, planInput);
+const code2 = await ensureMonthlyPlan(db, planInput);
+check("plan created on first use and reused after", code1 === "PLN_on_demand_1" && code2 === code1 && planCalls === 1, { code1, code2, planCalls });
+const code3 = await ensureMonthlyPlan(db, { ...planInput, amountKobo: 4_800_000 });
+check("a price change gets its own plan", code3 === "PLN_on_demand_2" && planCalls === 2, { code3, planCalls });
+const code4 = await ensureMonthlyPlan(db, { ...planInput, seats: 6 });
+check("a seat change gets its own plan", code4 === "PLN_on_demand_3" && planCalls === 3, { code4, planCalls });
+check("plans stored per product, seats and amount", (await db.select().from(payPlans)).length === 3);
 
 console.log(failures ? `\n${failures} FAILED` : "\nALL PASSED");
 process.exit(failures ? 1 : 0);

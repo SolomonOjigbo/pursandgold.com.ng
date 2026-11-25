@@ -57,7 +57,7 @@ for your product with Paystack. Your product's webhook is registered with Purs P
 | `PURS_PAY_URL` | Base URL of Purs Pay: `https://www.pursandgold.com.ng`. Test and live run on the same deployment, selected per checkout by `PAYSTACK_MODE` on the Purs Pay side. |
 | `PURS_PAY_KEY` | This product's bearer key. Issued by the human; matches `PAY_APP_<SLUG>_KEY` on Purs Pay. |
 | `PURS_PAY_WEBHOOK_SECRET` | Verifies events. Matches `PAY_APP_<SLUG>_WEBHOOK_SECRET` on Purs Pay. A different secret from the key. |
-| `BILLING_PLAN_*` (names are yours) | Paystack **plan codes** (`PLN_…`) for each plan. **Test and live have different plan codes**, so these are env, not code. |
+| `BILLING_PLAN_*` (names are yours) | Only if you pass pre-made plan codes. **Test and live have different `PLN_…` codes**, so they are env, not code. Products that send `recurring` need none. |
 
 Add all of them to the product's `.env.example` with placeholder values and a comment. Never commit real values.
 Ask the human for any value you do not have; do not invent keys or plan codes.
@@ -78,9 +78,10 @@ Use the wrapper functions in `lib/purs-pay.ts`; this section is so you know what
 |---|---|---|
 | `tenantId` | yes | Your id for the paying customer (tenant, school, store, workspace). Echoed on every event. |
 | `email` | yes | Payer's email. |
-| `amountKobo` | yes | Positive integer. For a plan, pass the plan's price; Paystack bills the plan's amount and Purs Pay does not enforce equality. |
+| `amountKobo` | yes | Positive integer. With `recurring` this is the monthly charge and must equal your computed price: Purs Pay creates the plan at exactly this amount and checks it. With a pre-made `planCode`, Paystack bills the plan's amount and Purs Pay does not enforce equality. |
 | `currency` | no | `NGN` (default), `USD`, `GHS`, `ZAR`, `KES`. Only currencies enabled on the Paystack account work. |
-| `planCode` | no | `PLN_…`. Starts a recurring subscription. |
+| `planCode` | no | `PLN_…` for a pre-made plan. Starts a recurring subscription. Cannot be combined with `recurring`. |
+| `recurring` | no | `{ planKey, seats }`. For amounts computed per tenant: Purs Pay creates or reuses a fixed-amount monthly Paystack plan for this product, plan key, seat count, currency and `amountKobo`, then starts a subscription. Prices live in your app, not in Paystack plan codes. |
 | `callbackUrl` | no | https (http only for localhost), origin must be registered. Paystack appends `?reference=…&trxref=…`. |
 | `idempotencyKey` | no, **recommended** | e.g. `invoice:<id>`. Same key returns the same pending checkout (`reused: true`) or `409 already_paid`. |
 | `channels` | no | Restrict payment methods. |
@@ -124,7 +125,9 @@ Adapt names to the product's existing conventions and ORM; keep the shape.
 - **Processed events table**: `event_id uuid primary key`, `type`, `reference`, `received_at`. Row-level security on and no policies (server only).
 - **Billing state per tenant**: plan, `status` (`active | past_due | cancelled`), `current_period_end`, `cancel_at_period_end`, `subscription_code`, `customer_code`.
 
-Plan intervals and prices come from the product's own plan configuration. Paystack plan codes map to your plan ids via env.
+Plan intervals and prices come from the product's own plan configuration. With `recurring`, Purs Pay keeps the
+Paystack plan (one per product, plan key, seat count, currency and amount) and gives you its code back in events;
+with pre-made plans, map them to your plan ids via env.
 
 ## 6. Implementation steps (Next.js App Router, TypeScript)
 
@@ -141,7 +144,8 @@ const { reference, authorizationUrl } = await initializePayment({
   tenantId: tenant.id,
   email: user.email,
   amountKobo: plan.priceKobo,              // from your plan source, never from the browser
-  planCode: process.env.BILLING_PLAN_GROWTH, // omit for a one-off payment
+  recurring: { planKey: plan.key, seats }, // monthly auto-renewal; omit for a one-off payment
+  // planCode: process.env.BILLING_PLAN_GROWTH, // or start a pre-made plan instead of `recurring`
   callbackUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/billing/return`,
   idempotencyKey: `invoice:${invoice.id}`,
   metadata: { invoiceId: invoice.id },
@@ -266,7 +270,7 @@ End to end on test mode: one-off payment, subscription first payment, a failed c
 ## 9. Definition of done
 
 - [ ] No Paystack SDK, keys or URLs anywhere in the product (`grep -ri paystack` shows nothing outside comments).
-- [ ] `lib/purs-pay.ts` copied unmodified; `PURS_PAY_*` and plan codes in `.env.example`, none in client bundles.
+- [ ] `lib/purs-pay.ts` copied unmodified; `PURS_PAY_*` and (only when using pre-made plans) plan codes in `.env.example`, none in client bundles.
 - [ ] `amountKobo`, `planCode`, `tenantId` derived server-side; `reference` saved before redirect; `idempotencyKey` used.
 - [ ] Webhook verifies the raw body, dedupes on `event.id` inside the same transaction as the entitlement change, returns `401/5xx/2xx` per section 2.
 - [ ] Amount, currency and tenant cross-checked against the product's own records.

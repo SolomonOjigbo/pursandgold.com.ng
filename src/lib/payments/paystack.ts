@@ -106,6 +106,22 @@ export type InitializeInput = {
   metadata?: Record<string, unknown>;
 };
 
+export type PaystackPlan = {
+  plan_code: string;
+  name: string;
+  amount: number;
+  interval: string;
+  currency: string;
+};
+
+/** Creates a fixed-amount Paystack plan. Used for products that bill an amount that is computed per tenant. */
+export function createPlan(
+  input: { name: string; amount: number; interval: "monthly"; currency: string },
+  mode: PaystackMode = activePaystackMode(),
+) {
+  return call<PaystackPlan>("/plan", { method: "POST", body: JSON.stringify(input) }, mode);
+}
+
 export function initializeTransaction(input: InitializeInput, mode: PaystackMode = activePaystackMode()) {
   return call<{ authorization_url: string; access_code: string; reference: string }>(
     "/transaction/initialize",

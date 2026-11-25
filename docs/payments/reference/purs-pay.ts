@@ -71,7 +71,13 @@ export type InitializeInput = {
   /** Minor units. 1 NGN = 100 kobo. For a subscription, pass the plan's price; Paystack bills the plan's amount. */
   amountKobo: number;
   currency?: "NGN" | "USD" | "GHS" | "ZAR" | "KES";
-  /** Paystack plan code (PLN_xxx) to start a recurring subscription. Differs between Paystack test and live mode. */
+  /**
+   * Monthly auto-renewal without storing Paystack plan codes: Purs Pay creates (or reuses) a fixed-amount
+   * monthly plan for this plan key, seat count, currency and amountKobo. The customer is billed that amount
+   * every month until the subscription is disabled. Cannot be combined with `planCode`.
+   */
+  recurring?: { planKey: string; seats: number };
+  /** Pre-made Paystack plan code (PLN_xxx). Only for products whose plans are created in the dashboard. */
   planCode?: string;
   /** Where Paystack returns the customer. Its origin must be listed in PAY_APP_<SLUG>_ORIGINS on Purs Pay. */
   callbackUrl?: string;

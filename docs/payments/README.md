@@ -15,7 +15,7 @@ Implementers of a product integration: read [`AGENTS.md`](./AGENTS.md). Copy [`r
 
 | Concern | How |
 |---|---|
-| Start a checkout | `POST /api/pay/transactions/initialize`. Creates reference `TNV-…` / `VRT-…` / `PRB-…` / `PEDU-…`, stores the expected amount and the mode, calls Paystack. Idempotent on `idempotencyKey` within a mode. |
+| Start a checkout | `POST /api/pay/transactions/initialize`. Creates reference `TNV-…` / `VRT-…` / `PRB-…` / `PEDU-…`, stores the expected amount and the mode, calls Paystack. `recurring: { planKey, seats }` makes it a monthly auto-renewing subscription and creates/reuses the fixed-amount Paystack plan on demand. Idempotent on `idempotencyKey` within a mode. |
 | Receive Paystack events | `POST /api/pay/webhooks/paystack`. Verifies `x-paystack-signature` with the test or live secret (HMAC-SHA512 of the raw body), records the mode, dedupes, **re-verifies the transaction with Paystack**, checks amount and currency, then queues delivery. |
 | Route to the right product | By reference prefix for our own checkouts. Subscription renewals and lifecycle events carry no reference of ours, so owners are remembered in `pay_subscriptions` (mode + customer + plan, then subscription code). Test never routes to live. |
 | Deliver to the product | HMAC-SHA256 signed POST with timestamp (`x-purs-signature: t=…,v1=…`) and `x-purs-mode`, 8 s timeout, backoff 1 m, 5 m, 15 m, 1 h, 3 h, 6 h, 12 h, 24 h, then dead after 12 attempts (ops emailed). |
@@ -25,8 +25,8 @@ Implementers of a product integration: read [`AGENTS.md`](./AGENTS.md). Copy [`r
 Events forwarded: `payment.succeeded`, `subscription.created`, `subscription.disabled`, `subscription.not_renewing`, `invoice.payment_failed`.
 Every event carries `mode: "test" | "live"`. Everything else Paystack sends is recorded in `pay_events` and ignored.
 
-Tables (`drizzle/0001_payments.sql`, schema in `src/db/schema.ts`): `pay_transactions`, `pay_events`, `pay_deliveries`, `pay_subscriptions`.
-All four have a `mode` column (`test` | `live`).
+Tables (`drizzle/0001_payments.sql` and `drizzle/0002_pay_plans.sql`, schema in `src/db/schema.ts`): `pay_transactions`, `pay_events`, `pay_deliveries`, `pay_subscriptions`, `pay_plans`.
+All five have a `mode` column (`test` | `live`). `pay_plans` maps product + plan key + seats + currency + amount to the Paystack plan code created for it.
 
 Safety properties: products authenticate with their own key (constant-time compare) and can only read their own transactions;
 `callbackUrl` must be on the product's registered origins (no open redirect); an amount or currency mismatch is flagged `mismatch`, emailed, and
@@ -34,12 +34,12 @@ never forwarded as paid; amounts are integer kobo; a retried Paystack webhook ca
 
 ## Set up
 
-1. **Migrate Neon**: apply `drizzle/0001_payments.sql` (idempotent) to the same database as the website, e.g. in the Neon SQL editor, or `pnpm drizzle-kit push`.
+1. **Migrate Neon**: apply `drizzle/0001_payments.sql` and `drizzle/0002_pay_plans.sql` (both idempotent) to the same database as the website, e.g. in the Neon SQL editor, or `pnpm drizzle-kit push`.
 2. **Generate secrets** (one value each, never reuse): for every product `openssl rand -hex 32` for `_KEY` and again for `_WEBHOOK_SECRET`; and one for `CRON_SECRET`.
 3. **Set env vars** from `.env.example` in Vercel: `PAYSTACK_MODE`, `PAYSTACK_TEST_SECRET_KEY`, `PAYSTACK_LIVE_SECRET_KEY`, `CRON_SECRET`, and the four `PAY_APP_<SLUG>_*` blocks. Give each product its `_KEY` and `_WEBHOOK_SECRET` (as `PURS_PAY_KEY` / `PURS_PAY_WEBHOOK_SECRET`). The public keys and `PAYSTACK_CALLBACK_URL` are not read by Purs Pay.
 4. **Register the webhook in Paystack**: Settings → API Keys & Webhooks. Set **both** Test webhook URL and Live webhook URL to `https://www.pursandgold.com.ng/api/pay/webhooks/paystack`.
 5. **Schedule the retry job** every 5 minutes (see below).
-6. **Create Paystack plans** in the dashboard for each product's subscription tiers. Plan codes differ between test and live; each product keeps them in env.
+6. **Plans**: products that send `recurring` need no setup — Purs Pay creates a fixed-amount monthly Paystack plan per product, plan key, seat count and amount. Products that pass a pre-made `planCode` still have their plans created in the dashboard; those codes differ between test and live and live in the product's env.
 
 ### One deployment: test and live
 

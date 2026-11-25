@@ -109,6 +109,27 @@ export const payDeliveries = pgTable(
   ],
 );
 
+/** A Paystack plan created on demand for a product's monthly recurring charge. Reused for the same plan, seats and price. */
+export const payPlans = pgTable(
+  "pay_plans",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    product: varchar("product", { length: 40 }).notNull(),
+    mode: varchar("mode", { length: 8 }).notNull().default("test"),
+    /** The product's own plan id, e.g. `starter`. */
+    planKey: varchar("plan_key", { length: 80 }).notNull(),
+    seats: integer("seats").notNull(),
+    currency: varchar("currency", { length: 3 }).notNull().default("NGN"),
+    /** Billed every month, in minor units. Part of the key: a price change becomes a new plan, never a silent reprice. */
+    amountKobo: bigint("amount_kobo", { mode: "number" }).notNull(),
+    planCode: varchar("plan_code", { length: 60 }).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("pay_plans_key").on(t.mode, t.product, t.planKey, t.seats, t.currency, t.amountKobo),
+  ],
+);
+
 /** Maps a Paystack subscription/customer to the product and tenant that own it, so renewals can be routed. */
 export const paySubscriptions = pgTable(
   "pay_subscriptions",
